@@ -108,8 +108,9 @@ class View {
         echo '<body>' . "\n";
 
         if ($this->_jquery) {
-            echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>' . "\n";
-            echo '<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>' . "\n";
+            echo '<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>' . "\n";
+            echo '<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.9.1/jquery.tablesorter.min.js"></script>';
+            echo '<script type="text/javascritp" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>' . "\n";
         }
 
         if (count($this->_script) > 0) {

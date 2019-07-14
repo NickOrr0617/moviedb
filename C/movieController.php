@@ -7,7 +7,7 @@ class movieController extends Controller {
     public function showMovies($offset = 0) {
         $this->_view = new View();
         $this->_view->SetTitle('Movies');
-
+        
         $this->_view->Addjquery();
 
         $movies = Movie::getMovies($offset);

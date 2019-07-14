@@ -1,9 +1,19 @@
-<table>
+<script type="text/javascript">
+        $(function() {
+      $("#movies").tablesorter();
+    }); 
+</script>
+
+
+<table id="movies" class="tablesorter">
+<thead>
 <tr>
     <th>Title</th>
     <th>Release Date</th>
     <th>Vote Count</th>
 </tr>
+</thead>
+<tbody>
 <?php foreach ($this->movies as $movie) {?>
     <tr>
         <td><?php echo $movie->getTitle()?></td>
@@ -11,4 +21,5 @@
         <td><?php echo $movie->getVoteCount()?></td>
     </tr>
 <?php } ?>
+</tbody>
 </table>
