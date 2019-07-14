@@ -4,11 +4,11 @@
     <th>Release Date</th>
     <th>Vote Count</th>
 </tr>
-<?foreach ($this->movies as $movie) {?>
+<?php foreach ($this->movies as $movie) {?>
     <tr>
-        <td><?=$movie['title']?></td>
-        <td><?=$movie['release_date']?></td>
-        <td><?=$movie['vote_count']?></td>
+        <td><?php echo $movie->getTitle()?></td>
+        <td><?php echo $movie->getReleaseDate()?></td>
+        <td><?php echo $movie->getVoteCount()?></td>
     </tr>
-<? } ?>
+<?php } ?>
 </table>

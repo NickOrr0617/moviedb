@@ -77,7 +77,7 @@ class View {
     }
 
     private function header() {
-        echo '<html>' . "\n";
+        echo '<!DOCTYPE html>' . "\n";
         echo '<head>' . "\n";
 
         echo '<meta property="og:title" content="' . $this->_title . '"/>' . "\n";
