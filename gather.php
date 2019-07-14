@@ -8,36 +8,70 @@ set_include_path(
 require_once 'Logger.php';
 require_once 'Movie.php';
 
+/*
+["page"]=>
+  int(1)
+  ["total_results"]=>
+  int(534)
+  ["total_pages"]=>
+  int(27)
 
+ */
 
-$json = get_movie_data(1);
+$page = 1;
+
+$json = get_movie_data($page);
 
 $data = json_decode($json);
-//var_dump($data);
+$moviesSaved = save_results($data->results);
 
-if (null !== $data) {
-    //load to db
-    foreach ($data->results as $movie) {
-        $m = new Movie();
+if ($data->total_results >= 100) {
+    while ($moviesSaved < 100) {
+        $page++;
+        $json = get_movie_data($page);
 
-        $m->setId($movie->id);
-        $m->setAdult($movie->adult);
-        $m->setBackdropPath($movie->backdrop_path);
-        $m->setGenreIds(json_encode($movie->genre_ids));
-        $m->setOriginalLanguage($movie->original_language);
-        $m->setOriginalTitle($movie->original_title);
-        $m->setOverview($movie->overview);
-        $m->setPopularity($movie->popularity);
-        $m->setPosterPath($movie->poster_path);
-        $m->setReleaseDate($movie->release_date);
-        $m->setTitle($movie->title);
-        $m->setVideo($movie->video);
-        $m->setVoteAverage($movie->vote_average);
-        $m->setVoteCount($movie->vote_count);
+        $data = json_decode($json);
 
-        $m->save();
+        if ($moviesSaved + count($data->results) < 100) {
+            $moviesSaved += save_results($data->results);
+        } else {
+            //splice so we get 100 results
+            $needed = 100 - $moviesSaved;
+            $moviesSaved += save_results(array_slice($data->results, 0, $needed));
+        }
     }
-    echo 'Finished saving results';
+}
+
+echo "Finished saving results\n";
+
+function save_results($movies) {
+    $numResults = 0;
+    if (null !== $movies) {
+    //load to db
+        foreach ($movies as $movie) {
+            $m = new Movie();
+
+            $m->setId($movie->id);
+            $m->setAdult($movie->adult);
+            $m->setBackdropPath($movie->backdrop_path);
+            $m->setGenreIds(json_encode($movie->genre_ids));
+            $m->setOriginalLanguage($movie->original_language);
+            $m->setOriginalTitle($movie->original_title);
+            $m->setOverview($movie->overview);
+            $m->setPopularity($movie->popularity);
+            $m->setPosterPath($movie->poster_path);
+            $m->setReleaseDate($movie->release_date);
+            $m->setTitle($movie->title);
+            $m->setVideo($movie->video);
+            $m->setVoteAverage($movie->vote_average);
+            $m->setVoteCount($movie->vote_count);
+
+            $m->save();
+
+            $numResults++;
+        }
+    }
+    return $numResults;
 }
 
 function get_movie_data($page)
