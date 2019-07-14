@@ -1,0 +1,14 @@
+<table>
+<tr>
+    <th>Title</th>
+    <th>Release Date</th>
+    <th>Vote Count</th>
+</tr>
+<?foreach ($this->movies as $movie) {?>
+    <tr>
+        <td><?=$movie['title']?></td>
+        <td><?=$movie['release_date']?></td>
+        <td><?=$movie['vote_count']?></td>
+    </tr>
+<? } ?>
+</table>

@@ -43,6 +43,38 @@ class Movie {
         }
     }
 
+    public static function getMovies($offset = 0) {
+        $model = new MovieModel();
+        $rc = $model->select('*', null, null, "$offset, 20");
+        if (count($rc) == 0) {
+            return null;
+        } else {
+            $movies = array();
+
+            foreach ($rc as $m) {
+                $movie = new Movie();
+                $movie->setId($m['id']);
+                $movie->setAdult($m['adult']);
+                $movie->setBackdropPath($m['backdrop_path']);
+                $movie->setGenreIds($m['genre_ids']);
+                $movie->setOriginalLanguage($m['original_language']);
+                $movie->setOriginalTitle($m['original_title']);
+                $movie->setOverview($m['overview']);
+                $movie->setPopularity($m['popularity']);
+                $movie->setPosterPath($m['poster_path']);
+                $movie->setReleaseDate($m['release_date']);
+                $movie->setTitle($m['title']);
+                $movie->setVideo($m['video']);
+                $movie->setVoteAverage($m['vote_average']);
+                $movie->setVoteCount($m['vote_count']);
+                array_push($movies, $movie);
+            }
+            
+            return $movies;
+        }
+    }
+
+
     public function save() {
         $values = array();
         $values['id'] = $this->getId();

@@ -13,7 +13,6 @@ class View {
     protected $__file;
     private $_script = array();
     private $_jquery = false;
-    private $_analytics = true;
     private $_css = array();
     private $_meta = array();
     private $_title;
@@ -53,10 +52,6 @@ class View {
         }
     }
 
-    public function DisableAnalytics() {
-        $this->_analytics = false;
-    }
-
     public function Addjquery() {
         $this->_jquery = true;
     }
@@ -82,18 +77,11 @@ class View {
     }
 
     private function header() {
-        echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">' . "\n";
-        echo '<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#">' . "\n";
+        echo '<html>' . "\n";
         echo '<head>' . "\n";
 
         echo '<meta property="og:title" content="' . $this->_title . '"/>' . "\n";
-        echo '<meta property="og:type" content="company"/>' . "\n";
-        echo '<meta property="og:url" content="http://www.aeinvoice.com' . $_SERVER['REQUEST_URI'] . '"/>' . "\n";
-        echo '<meta property="og:image" content="http://www.orrsoftware.com/images/aeinvoice.png"/>' . "\n";
-        echo '<meta property="og:site_name" content="AEInvoice.com"/>' . "\n";
-
-        echo '<meta name="robots" content="index, follow" />' . "\n";
-
+        
         foreach ($this->_meta as $meta) {
             echo $meta . "\n";
         }
@@ -113,32 +101,15 @@ class View {
         }
 
         if ($this->_jquery) {
-            echo '<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/ui-lightness/jquery-ui.css" media="screen"/>';
-        }
-
-        if ($this->_analytics) {
-            echo '
-            <script type="text/javascript">
-
-              var _gaq = _gaq || [];
-              _gaq.push([\'_setAccount\', \'UA-26463756-1\']);
-              _gaq.push([\'_trackPageview\']);
-
-              (function() {
-                var ga = document.createElement(\'script\'); ga.type = \'text/javascript\'; ga.async = true;
-                ga.src = (\'https:\' == document.location.protocol ? \'https://ssl\' : \'http://www\') + \'.google-analytics.com/ga.js\';
-                var s = document.getElementsByTagName(\'script\')[0]; s.parentNode.insertBefore(ga, s);
-              })();
-
-            </script>' . "\n";
+            echo '<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">';
         }
 
         echo '</head>' . "\n";
         echo '<body>' . "\n";
 
         if ($this->_jquery) {
-            echo '<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>' . "\n";
-            echo '<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js"></script>' . "\n";
+            echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>' . "\n";
+            echo '<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>' . "\n";
         }
 
         if (count($this->_script) > 0) {
@@ -153,7 +124,6 @@ class View {
 
         echo '<div class="content">' . "\n";
         if ($this->_showTitle) {
-            echo '<a href="http://www.aeinvoice.com" title="AEInvoice Home"><img class="logo" src="http://www.orrsoftware.com/images/aeinvoice.png" alt="AEInvoice Home" /></a>';
             echo '<h1 class="title center">' . $this->_title . '</h1>'. "\n";
         }
     }
