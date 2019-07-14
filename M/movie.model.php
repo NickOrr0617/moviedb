@@ -1,4 +1,4 @@
-<?
+<?php
 require_once 'DataModel.php';
 require_once 'connections.php';
 

@@ -5,6 +5,7 @@ set_include_path(
     realpath('M') . PATH_SEPARATOR .
     get_include_path());
 
+require_once 'Logger.php';
 require_once 'Movie.php';
 
 

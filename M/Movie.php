@@ -27,18 +27,18 @@ class Movie {
             if ($a != null) {
                 $this->setId($a[0]['id']);
                 $this->setAdult($a[0]['adult']);
-                $this->setBackdropPath($a[0]['backdropPath']);
-                $this->setGenreIds($a[0]['genreIds']);
-                $this->setOriginalLanguage($a[0]['originalLanguage']);
-                $this->setOriginalTitle($a[0]['originalTitle']);
+                $this->setBackdropPath($a[0]['backdrop_path']);
+                $this->setGenreIds($a[0]['genre_ids']);
+                $this->setOriginalLanguage($a[0]['original_language']);
+                $this->setOriginalTitle($a[0]['original_title']);
                 $this->setOverview($a[0]['overview']);
                 $this->setPopularity($a[0]['popularity']);
-                $this->setPosterPath($a[0]['posterPath']);
-                $this->setReleaseDate($a[0]['releaseDate']);
+                $this->setPosterPath($a[0]['poster_path']);
+                $this->setReleaseDate($a[0]['release_date']);
                 $this->setTitle($a[0]['title']);
                 $this->setVideo($a[0]['video']);
-                $this->setVoteAverage($a[0]['voteAverage']);
-                $this->setVoteCount($a[0]['voteCount']);
+                $this->setVoteAverage($a[0]['vote_average']);
+                $this->setVoteCount($a[0]['vote_count']);
             }
         }
     }
@@ -47,23 +47,23 @@ class Movie {
         $values = array();
         $values['id'] = $this->getId();
         $values['adult'] = $this->getAdult();
-        $values['backdropPath'] = $this->getBackdropPath();
-        $values['genreIds'] = $this->getGenreIds();
-        $values['originalLanguage'] = $this->getOriginalLanguage();
-        $values['originalTitle'] = $this->getOriginalTitle();
+        $values['backdrop_path'] = $this->getBackdropPath();
+        $values['genre_ids'] = $this->getGenreIds();
+        $values['original_language'] = $this->getOriginalLanguage();
+        $values['original_title'] = $this->getOriginalTitle();
         $values['overview'] = $this->getOverview();
         $values['popularity'] = $this->getPopularity();
-        $values['posterPath'] = $this->getPosterPath();
-        $values['releaseDate'] = $this->getReleaseDate();
+        $values['poster_path'] = $this->getPosterPath();
+        $values['release_date'] = $this->getReleaseDate();
         $values['title'] = $this->getTitle();
         $values['video'] = $this->getVideo();
-        $values['voteAverage'] = $this->getVoteAverage();
-        $values['voteCount'] = $this->getVoteCount();
+        $values['vote_average'] = $this->getVoteAverage();
+        $values['vote_count'] = $this->getVoteCount();
             
-        $this->model->insert($values, /*exclude*/array());
+        $this->model->insert($values);
     }
 
-    protected function setId($id) {
+    public function setId($id) {
         $this->id = $id;
     }
 

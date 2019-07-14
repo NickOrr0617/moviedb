@@ -1,4 +1,4 @@
-<?
+<?php
 /*******************************
  * Generic data model class used
  * for modeling db tables as objects
@@ -92,7 +92,7 @@ abstract class DataModel {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function insert($values, $exclude = array('id')) {
+    public function insert($values, $exclude = array()) {
         $cols = $this->sqlColumns;
         if (is_array($exclude)) {
             $cols = explode(',', $cols);

@@ -9,7 +9,7 @@
  ******************************/
 
 class Logger {
-    private static $_logfile = '/var/log/invoice.log';
+    private static $_logfile = 'movie.log';
     private static $_file = null;
 
     private function __construct() {
@@ -23,8 +23,13 @@ class Logger {
         if (self::$_file == null) {
             self::$_file = fopen(self::$_logfile, 'a');
         }
+        if (!isset($_SERVER['REMOTE_ADDR'])) {
+            $ip = 'localhost';
+        } else {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
 
-        fwrite(self::$_file, date('m/d/Y - H:i:s') . ' - ' .  $message . ' - IP:[' . $_SERVER['REMOTE_ADDR'] . ']' . "\n");
+        fwrite(self::$_file, date('m/d/Y - H:i:s') . ' - ' .  $message . ' - IP:[' . $ip . ']' . "\n");
     }
 }
 ?>

@@ -1,4 +1,4 @@
-<?
+<?php
 /*******************************
  * Connection interface sets up
  * what should be common on all

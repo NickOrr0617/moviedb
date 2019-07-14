@@ -1,4 +1,4 @@
-<?
+<?php
 /*******************************
  * Connection manager for all 
  * database connections in the program
