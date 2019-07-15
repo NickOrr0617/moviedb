@@ -175,7 +175,7 @@ $(function() {
 <tbody>
 <?php foreach ($this->movies as $movie) {?>
     <tr>
-        <td><?php echo $movie->getTitle()?></td>
+        <td><a href="#modal-<?php echo $movie->getId()?>" rel="modal:open"><?php echo $movie->getTitle()?></a></td>
         <td><?php echo $movie->getReleaseDate()?></td>
         <td><?php echo $movie->getVoteCount()?></td>
     </tr>
@@ -201,3 +201,11 @@ $(function() {
     </select>
   </form>
 </div>
+
+<?php foreach ($this->movies as $movie) {?>
+<div id="modal-<?php echo $movie->getId()?>" class="modal">
+        <img style="float:right;width:50%;padding-left:10px;" src="https://image.tmdb.org/t/p/w500/<?php echo $movie->getPosterPath();?>"/>
+        <br / >
+        <p><?php echo $movie->getOverview();?></p>
+</div>
+<?php } ?>
