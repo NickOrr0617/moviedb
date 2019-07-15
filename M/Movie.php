@@ -96,6 +96,7 @@ class Movie implements JsonSerializable {
         $this->model->insert($values);
     }
 
+    /*
     public function jsonSerialize()
     {
         return
@@ -116,6 +117,7 @@ class Movie implements JsonSerializable {
             'vote_count' => $this->getVoteCount(),
         ];
     }
+    */
 
     public function setId($id) {
         $this->id = $id;
