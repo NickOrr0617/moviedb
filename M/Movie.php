@@ -1,6 +1,6 @@
 <?php
 require_once 'movie.model.php';
-class Movie {
+class Movie implements JsonSerializable {
     private $model;
 
     protected $id = null;
@@ -45,7 +45,8 @@ class Movie {
 
     public static function getMovies($offset = 0) {
         $model = new MovieModel();
-        $rc = $model->select('*', null, null, "$offset, 20");
+        //$rc = $model->select('*', null, null, "$offset, 20");
+        $rc = $model->select('*', null);
         if (count($rc) == 0) {
             return null;
         } else {
@@ -93,6 +94,27 @@ class Movie {
         $values['vote_count'] = $this->getVoteCount();
             
         $this->model->insert($values);
+    }
+
+    public function jsonSerialize()
+    {
+        return
+        [
+            'id'   => $this->getId(),
+            'adult' => $this->getAdult(),
+            'backdrop_path' => $this->getBackdropPath(),
+            'genre_ids' => $this->getGenreIds(),
+            'original_language' => $this->getOriginalLanguage(),
+            'original_title' => $this->getOriginalTitle(),
+            'overview' => $this->getOverview(),
+            'popularity' => $this->getPopularity(),
+            'poster_path' => $this->getPosterPath(),
+            'release_date' => $this->getReleaseDate(),
+            'title' => $this->getTitle(),
+            'video' => $this->getVideo(),
+            'vote_average' => $this->getVoteAverage(),
+            'vote_count' => $this->getVoteCount(),
+        ];
     }
 
     public function setId($id) {

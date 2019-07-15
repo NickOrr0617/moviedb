@@ -10,8 +10,9 @@ class movieController extends Controller {
         
         $this->_view->Addjquery();
 
-        $movies = Movie::getMovies($offset);
+        $movies = Movie::getMovies();
 
+        //$this->_view->movies = json_encode($movies);
         $this->_view->movies = $movies;
         $this->_view->render('movies.phtml');
     }
